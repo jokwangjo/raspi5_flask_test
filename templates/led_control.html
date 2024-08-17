@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <!--
+		공대선배 라즈베리 파이썬 #18 웹사이트에 숫자를 입력하여 3색 LED의 색을 조절하는 코드 html 파일
+		채널 주소 : https://www.youtube.com/channel/UCsiwB64NJe1JYFZ6iUeFQqA
+	-->
+    <!--title은 브라우저 맨 위(제목표시줄)에 나오는 내용을 결정-->
+    <title>LED CONTROLLER</title>
+    <meta name="viewport" content="width=device-width initial-scale=1">
+</head>
+
+<body>
+    <!--본문 시작. h1은 가장 큰 글씨로 글자를 써줌-->
+    <h1>Web에서 라즈베리파이의 3색 LED 제어하기: 밝기 직접 입력</h1>
+    <!--hr은 수평 가로줄을 그려줌-->
+    <hr>
+    <div style="padding-left:20px;">
+        <!--h3는 중간크기 글씨로 글자를 써줌-->
+        <h3>3색 LED 제어</h3>
+        <!--
+					html에서 파이썬으로 변수값을 보낼때, GET, POST 두가지 방식중 하나를 사용해서 넘겨줌
+					여기서는 GET 방식을 사용함. 또한 변수값 전송은 form 형태로 만들어둬야 함
+					submit 명령어를 사용해야 값을 파이썬으로 전달해줌
+					또한 action="/led_control"로 해두면, 해당 주소에서 변수를 요청해야 값을 넘겨줌
+					복잡한 사이트에서 혼동을 방지하기 위한 것(사용자1용 페이지에서 사용자 2의 변수값을 요구할 수 없음) 
+				-->
+        <form method="GET" action="/led_control">
+            <div style="color: red;">
+                <label for="red"> LED17 : </label>
+                <input type="text" name="led17">
+                현재밝기 : {{led17}}
+                <!--빨간색 : '텍스트입력' 현재밝기 : 빨간색밝기 형태로 출력됨-->
+                <!--값을 입력하면 html에서 우선 red=밝기 로 저장해둠("red"가 변수명)-->
+            </div>
+            <div style="color: green;">
+                <label for="green"> LED27 : </label>
+                <input type="text" name="led27">
+                현재밝기 : {{led27}}
+            </div>
+            <div class='button' style="padding-left:60px;">
+                <button type="submit"> 확인 </button>
+                <!--'확인' 버튼을 하나 만들어두고 -->
+                <!--버튼을 누르면 red, green, blue 변수를 파이썬에 보내줌-->
+            </div>
+        </form>
+        <hr>
+    </div>
+</body>
+
+</html>

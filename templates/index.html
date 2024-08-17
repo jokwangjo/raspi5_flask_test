@@ -1,0 +1,92 @@
+<html>
+
+<head>
+    <!--공대선배 라즈베리 파이썬 #13 라즈베리파이 제어용 웹사이트 만들기 html 파일-->
+    <!--https://www.youtube.com/channel/UCsiwB64NJe1JYFZ6iUeFQqA-->
+    <!--title은 브라우저 맨 위(제목표시줄)에 나오는 내용을 결정-->
+    <title>LED CONTROLLER</title>
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <!--1초마다 웹사이트 새로고침을 하여 라즈베리파이의 상태를 갱신-->
+    <meta http-equiv="refresh" content="1">
+</head>
+
+<body>
+    <!--본문 시작. h1은 가장 큰 글씨로 글자를 써줌-->
+    <h1>Web에서 라즈베리파이의 LED 제어하기</h1>
+    <!--hr은 수평 가로줄을 그려줌-->
+    <hr>
+
+    <div style="padding-left:20px;">
+        <!--h3는 중간크기 글씨로 글자를 써줌-->
+        <h3>적,녹,청 LED 각각 제어</h3>
+        <!--p는 위아래로 한줄 띄어서 글자를 써줌-->
+        <p style="color: red;">
+            <!--b는 글자를 굵게(bold) 표시함-->
+            <b>빨간색 LED: </b>
+            <!--버튼을 만들어서, 버튼을 누르면 파이썬 코드의 LED_control 함수가 실행됨-->
+            <!--color와 state는 함수의 입력인자-->
+            <a href="{{ url_for('LED_control', led='led1', state=1) }}"><input type="button" value="ON"></a>
+            <a href="{{ url_for('LED_on_3_sec', led='led1') }}"><input type="button" value="3 sec"></a>
+            <a href="{{ url_for('LED_blink_1sec_core', led='led1') }}"><input type="button" value="blink"></a>
+            <a href="{{ url_for('LED_control', led='led1', state=0) }}"> <input type="button" value="OFF"> </a>
+        </p>
+        <p style="color: green;">
+            <b>초록색 LED: </b>
+
+            <a href="{{ url_for('LED_control', led='led2', state=1) }}"><input type="button" value="ON"></a>
+            <a href="{{ url_for('LED_on_3_sec', led='led2') }}"><input type="button" value="3 sec"></a>
+            <a href="{{ url_for('LED_blink_1sec_core', led='led2') }}"><input type="button" value="blink"></a>
+            <a href="{{ url_for('LED_control', led='led2', state=0) }}"> <input type="button" value="OFF"> </a>
+        </p>
+        <p style="color: blue;">
+            <b>파란색 LED: </b>
+
+            <a href="{{ url_for('LED_control', led='led3', state=1) }}"><input type="button" value="ON"></a>
+            <a href="{{ url_for('LED_on_3_sec', led='led3') }}"><input type="button" value="3 sec"></a>
+            <a href="{{ url_for('LED_blink_1sec_core', led='led3') }}"><input type="button" value="blink"></a>
+            <a href="{{ url_for('LED_control', led='led3', state=0) }}"> <input type="button" value="OFF"> </a>
+        </p>
+    </div>
+    <hr>
+
+    <div style="padding-left:20px;">
+        <p style="color: red;">
+            <!--led_state_dict 'red'의 요소가 1이면 빨간 LED: 켜짐 으로 출력됨-->
+            <!--b는 글자를 굵게(bold) 표시함-->
+            <b>왼쪽 스위치: {% if button_monitor_list[0]!=0 %} 켜짐
+                {% elif button_monitor_list[0]==0 %} 꺼짐
+                {% endif %}
+            </b>
+        </p>
+        <p style="color: green;">
+            <b>중간 스위치: {% if button_monitor_list[1]!=0 %} 켜짐
+                {% elif button_monitor_list[1]==0 %} 꺼짐
+                {% endif %}
+            </b>
+        </p>
+        <p style="color: blue;">
+            <b>오른쪽 스위치: {% if button_monitor_list[2]!=0 %} 켜짐
+                {% elif button_monitor_list[2]==0 %} 꺼짐
+                {% endif %}
+            </b>
+        </p>
+        <h1>Web에서 라즈베리파이의 3색 LED 제어하기: 밝기 직접 입력</h1>
+        <!--hr은 수평 가로줄을 그려줌-->
+        <hr>
+        <div style="padding-left:20px;">
+            <!--h3는 중간크기 글씨로 글자를 써줌-->
+            <h3>3색 LED 제어</h3>
+            <!--
+					html에서 파이썬으로 변수값을 보낼때, GET, POST 두가지 방식중 하나를 사용해서 넘겨줌
+					여기서는 GET 방식을 사용함. 또한 변수값 전송은 form 형태로 만들어둬야 함
+					submit 명령어를 사용해야 값을 파이썬으로 전달해줌
+					또한 action="/led_control"로 해두면, 해당 주소에서 변수를 요청해야 값을 넘겨줌
+					복잡한 사이트에서 혼동을 방지하기 위한 것(사용자1용 페이지에서 사용자 2의 변수값을 요구할 수 없음) 
+				-->
+
+            <hr>
+        </div>
+    </div>
+</body>
+
+</html>
